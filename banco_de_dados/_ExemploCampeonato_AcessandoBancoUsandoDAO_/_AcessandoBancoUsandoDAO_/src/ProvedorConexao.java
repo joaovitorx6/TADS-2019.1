@@ -25,9 +25,8 @@ public class ProvedorConexao {
 		String driver = "com.mysql.cj.jdbc.Driver";
         String user = "root";
         String senha = "rootadmin";
-		String url = "jdbc:mysql://localhost:3306/ifrn_db";
+		String url = "jdbc:mysql://localhost:3306/BIOLAB";
 		
-			
 			try {
 				Class.forName(driver);
 				Connection conn = (Connection) DriverManager.getConnection(url, user, senha);

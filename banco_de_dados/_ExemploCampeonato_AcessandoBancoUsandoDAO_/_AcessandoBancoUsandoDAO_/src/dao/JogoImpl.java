@@ -3,8 +3,10 @@ package dao;
 import campeonato.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JogoImpl implements JogoDAO {
@@ -35,7 +37,29 @@ public class JogoImpl implements JogoDAO {
 
 	@Override
 	public List<Jogo> listarTodosJogos() {
-		// TODO Auto-generated method stub
+		PreparedStatement preparedStatement;
+		Statement stm;
+		Connection conn;
+		List jogosAL = new ArrayList();
+		Jogo jogo;
+		try {
+			conn = ProvedorConexao.getConnection();
+			String selectSQL = "SELECT * FROM Jogo";
+			preparedStatement = conn.prepareStatement(selectSQL);
+			ResultSet jogoRS = preparedStatement.executeQuery(selectSQL);
+				
+				while(jogoRS.next()){
+					jogo = new Jogo(jogoRS.getInt("cod"), jogoRS.getInt("timea_cod"), jogoRS.getInt("timeb_cod"), jogoRS.getString("resultado"));
+					jogosAL.add(jogo);
+				}
+				
+				return jogosAL;
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

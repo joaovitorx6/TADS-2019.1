@@ -26,7 +26,7 @@ public class ProvedorConexao {
 		String driver = "com.mysql.cj.jdbc.Driver";
         String user = "root";
         String senha = "";
-		String url = "jdbc:mysql://localhost:3306/BIOLAB";
+		String url = "jdbc:mysql://localhost:3306/time";
 		
 			
 			try {
