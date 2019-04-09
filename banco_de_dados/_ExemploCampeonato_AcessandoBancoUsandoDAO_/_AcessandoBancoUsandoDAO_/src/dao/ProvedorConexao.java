@@ -25,8 +25,8 @@ public class ProvedorConexao {
 	
 		String driver = "com.mysql.cj.jdbc.Driver";
         String user = "root";
-        String senha = "";
-		String url = "jdbc:mysql://localhost:3306/time";
+        String senha = "senha";
+		String url = "jdbc:mysql://localhost:3306/campeonato";
 		
 			
 			try {

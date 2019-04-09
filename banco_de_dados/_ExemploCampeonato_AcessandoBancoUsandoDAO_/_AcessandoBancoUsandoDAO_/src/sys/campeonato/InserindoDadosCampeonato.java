@@ -16,6 +16,10 @@ public class InserindoDadosCampeonato {
 		JogadorDAO jogadordao = new JogadorImpl();
 		JogoDAO jogodao = new JogoImpl();
 		
+		List jogos = new ArrayList();
+		List jogadores = new ArrayList();
+		List times = new ArrayList();
+		
 		int op = 0; int cod=0; 
 		
 		while(true){
@@ -26,6 +30,8 @@ public class InserindoDadosCampeonato {
 			System.out.println("2 - Inserir Jogador");		
 			System.out.println("3 - Inserir Jogo");
 			System.out.println("4 - Listar os jogos");
+			System.out.println("5 - Listar os jogadores");
+			System.out.println("6 - Listar os times");
 			
 			op = dados.nextInt();
 			
@@ -72,7 +78,6 @@ public class InserindoDadosCampeonato {
 				jogodao.salvarJogo(jogo);
 				break;
 			case 4:
-				List jogos = new ArrayList();
 				Jogo jogo2;
 				jogos = jogodao.listarTodosJogos();
 				for (int i=0; i<jogos.size(); i++){
@@ -83,6 +88,22 @@ public class InserindoDadosCampeonato {
 					System.out.println("resultado:" + jogo2.getResultado());
 					System.out.println("-----------------------");
 				}
+				break;
+			case 5: 
+				Jogador jogador2;
+				jogadores = jogadordao.listarTodosJogadores();
+				for (int i=0; i<jogadores.size(); i++) {
+					jogador2 = (Jogador) jogadores.get(i);
+					System.out.println("codigo:" + jogador2.getCod());
+					System.out.println("nome:" + jogador2.getNome());
+					System.out.println("idade:" + jogador2.getIdade());
+					System.out.println("time_cod:" + jogador2.getTime_cod());
+					System.out.println("-----------------------");
+				}
+				break;
+			case 6:
+				Time time;
+				times = timedao.listarTodosTimes();
 				break;
 			default:
 				break;
