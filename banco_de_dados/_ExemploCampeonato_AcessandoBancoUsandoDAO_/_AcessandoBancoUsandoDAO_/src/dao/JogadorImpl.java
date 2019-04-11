@@ -10,6 +10,7 @@ import java.util.List;
 
 import campeonato.Jogador;
 import campeonato.Jogo;
+import campeonato.Time;
 
 public class JogadorImpl implements JogadorDAO {
 
@@ -43,7 +44,24 @@ public class JogadorImpl implements JogadorDAO {
 
 	@Override
 	public Jogador verJogadorPorCodigo(int codigo) {
-		// TODO Auto-generated method stub
+		PreparedStatement preparedStatement;
+		Statement stm;
+		Connection conn;
+//		criando objeto de time.
+		Jogador jogador=null;
+		try{
+			conn = ProvedorConexao.getConnection();
+			String selectItemSQL = "SELECT * FROM jogador WHERE cod = "+codigo;
+			preparedStatement = conn.prepareStatement(selectItemSQL);
+//			preparedStatement.setInt(1, codigo);
+			ResultSet jogadorRS = preparedStatement.executeQuery(selectItemSQL);
+			while (jogadorRS.next()){
+				jogador = new Jogador (jogadorRS.getInt("cod"),jogadorRS.getString("nome"), jogadorRS.getInt("idade"), jogadorRS.getInt("time_cod"));
+			}
+			return jogador;
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -73,8 +91,19 @@ public class JogadorImpl implements JogadorDAO {
 
 	@Override
 	public void deletarJogador(Jogador jogador) {
-		// TODO Auto-generated method stub
-
+		PreparedStatement preparedStatement;
+		Statement stm;
+		Connection conn;
+		try {
+			conn = ProvedorConexao.getConnection();
+			String deleteTimeSql = "DELETE FROM jogador WHERE cod=?";
+			preparedStatement = conn.prepareStatement(deleteTimeSql);
+			preparedStatement.setInt(1,jogador.getCod());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

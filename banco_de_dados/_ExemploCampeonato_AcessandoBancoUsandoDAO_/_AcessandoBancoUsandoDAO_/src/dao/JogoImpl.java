@@ -65,14 +65,42 @@ public class JogoImpl implements JogoDAO {
 
 	@Override
 	public Jogo verJogoPorCodigo(int codigo) {
-		// TODO Auto-generated method stub
+		PreparedStatement preparedStatement;
+		Statement stm;
+		Connection conn;
+//		criando objeto de time.
+		Jogo jogo=null;
+		try{
+			conn = ProvedorConexao.getConnection();
+			String selectItemSQL = "SELECT * FROM jogo WHERE cod = "+codigo;
+			preparedStatement = conn.prepareStatement(selectItemSQL);
+//			preparedStatement.setInt(1, codigo);
+			ResultSet jogoRS = preparedStatement.executeQuery(selectItemSQL);
+			while (jogoRS.next()){
+				jogo = new Jogo (jogoRS.getInt("cod"),jogoRS.getInt("timea_cod"), jogoRS.getInt("timeb_cod"), jogoRS.getString("resultado"));
+			}
+			return jogo;
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public void deletarJogo(Jogo jogo) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement preparedStatement;
+		Statement stm;
+		Connection conn;
+		try {
+			conn = ProvedorConexao.getConnection();
+			String deleteTimeSql = "DELETE FROM jogo WHERE cod=?";
+			preparedStatement = conn.prepareStatement(deleteTimeSql);
+			preparedStatement.setInt(1,jogo.getCod());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

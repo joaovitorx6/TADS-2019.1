@@ -32,7 +32,9 @@ public class InserindoDadosCampeonato {
 			System.out.println("4 - Listar os jogos");
 			System.out.println("5 - Listar os jogadores");
 			System.out.println("6 - Listar os times");
-			
+			System.out.println("7 - Deletar time");
+			System.out.println("8 - Deletar jogador");
+			System.out.println("9 - Deletar jogo");
 			op = dados.nextInt();
 			
 			switch (op) {
@@ -104,6 +106,24 @@ public class InserindoDadosCampeonato {
 			case 6:
 				Time time;
 				times = timedao.listarTodosTimes();
+				break;
+			case 7: 
+				System.out.println("Digite o código do time:");
+				cod = dados.nextInt();
+				time = timedao.verTimePorCodigo(cod);
+				timedao.deletarTime(time);
+				break;
+			case 8: 
+				System.out.println("Digite o código do jogador:");
+				cod = dados.nextInt();
+				jogador = jogadordao.verJogadorPorCodigo(cod);
+				jogadordao.deletarJogador(jogador);
+				break;
+			case 9:
+				System.out.println("Digite o código do jogo:");
+				cod = dados.nextInt();
+				jogo = jogodao.verJogoPorCodigo(cod);
+				jogodao.deletarJogo(jogo);
 				break;
 			default:
 				break;
